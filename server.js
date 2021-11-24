@@ -20,10 +20,26 @@ const db = mysql.createConnection(
     },
     console.log('Connected to the employees database.')
 );
+// // view all departmetns
+// db.query(`SELECT * FROM department`, (err, rows) => {
+//     console.log(rows);
+// });
 
-db.query(`SELECT * FROM department`, (err, rows) => {
-    console.log(rows);
-});
+// // Add a department
+// const sql = `INSERT INTO department (department_name)
+//                 Values (?)`;
+// const params = ['Marketing'];
+
+// db.query(sql, params, (err, result) => {
+//     if (err) {
+//         console.log(err);
+//     }
+//     console.log(result);
+// })
+
+// db.query(`SELECT * FROM employeerole`, (err, rows) => {
+//     console.log(rows);
+// })
 
 // responde for any other request (Not Found)
 app.use((req, res) => {
