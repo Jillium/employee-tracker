@@ -102,6 +102,22 @@ app.post('/api/employeerole', ({ body }, res) => {
     });
   });
 
+  // view all employees
+app.get('/api/employee', (req, res) => {
+    const sql = `SELECT * FROM employee`;
+
+    db.query(sql, (err, row) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: row
+        });
+    });
+});
+
 
 // respond for any other request (Not Found)
 app.use((req, res) => {
