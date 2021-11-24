@@ -62,12 +62,48 @@ app.post('/api/department', ({ body }, res) => {
   });
 
 
+// view all roles
+app.get('/api/employeerole', (req, res) => {
+    const sql = `SELECT * FROM employeerole`;
 
-// db.query(`SELECT * FROM employeerole`, (err, rows) => {
-//     console.log(rows);
-// })
+    db.query(sql, (err, row) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: row
+        });
+    });
+});
 
-// responde for any other request (Not Found)
+// Add a role
+app.post('/api/employeerole', ({ body }, res) => {
+    const errors = inputCheck(body, 'title', 'salary', 'department_id');
+    if (errors) {
+      res.status(400).json({ error: errors });
+      return;
+    }
+
+    const sql = `INSERT INTO employeerole (title, salary, department_id)
+                    VALUES (?, ?, ?)`;
+    const params = [body.title, body.salary, body.department_id];
+    
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: body
+        });
+    });
+  });
+
+
+// respond for any other request (Not Found)
 app.use((req, res) => {
     res.status(404).end();
 })
