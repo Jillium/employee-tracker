@@ -21,10 +21,8 @@ const db = mysql.createConnection(
     console.log('Connected to the employees database.')
 );
 
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello World!'
-    });
+db.query(`SELECT * FROM department`, (err, rows) => {
+    console.log(rows);
 });
 
 // responde for any other request (Not Found)
