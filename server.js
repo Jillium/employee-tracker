@@ -119,6 +119,30 @@ app.get('/api/employee', (req, res) => {
 });
 
 
+// Add an employee
+app.post('/api/employee', ({ body }, res) => {
+    const errors = inputCheck(body, 'first_name', 'last_name', 'role_id', 'manager_name');
+    if (errors) {
+      res.status(400).json({ error: errors });
+      return;
+    }
+
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_name)
+                    VALUES (?, ?, ?, ?)`;
+    const params = [body.first_name, body.last_name, body.role_id, body.manager_name];
+    
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+        res.json({
+            message: 'success',
+            data: body
+        });
+    });
+  });
+
 // respond for any other request (Not Found)
 app.use((req, res) => {
     res.status(404).end();
