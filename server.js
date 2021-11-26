@@ -1,6 +1,6 @@
-const mysql = require('mysql2');
 const express = require('express');
 const inputCheck = require('./utils/inputCheck');
+
 
 const PORT = process.env.PORT || 3011;
 const app = express();
@@ -9,19 +9,8 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// connect to database
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        // Your mysql username,
-        user: 'root',
-        // Your mysql password
-        password: 'bnmc7654',
-        database: 'employees'
-    },
-    console.log('Connected to the employees database.')
-);
-// view all departmetns
+
+// view all departmetns from an api
 app.get('/api/department', (req, res) => {
     const sql = `SELECT * FROM department`;
 
@@ -143,7 +132,7 @@ app.post('/api/employee', ({ body }, res) => {
     });
   });
 
-// Update a candidate's party
+// Update an employee role 
 app.put('/api/employee/:id', (req, res) => {
     const sql = `UPDATE employee SET role_id = ? 
                  WHERE id = ?`;
