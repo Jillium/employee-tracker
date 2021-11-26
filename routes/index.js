@@ -53,12 +53,65 @@ async function startQuestions() {
                 type: 'list',
                 name: 'departmentID',
                 message: "What department does the new role belong to?",
-                choices: ['Sales', 'Engineering', 'Finance', 'Legal']
+                choices: ['1', '2', '3', '4']
             }
             
         ])
+
         addRole();
     } else if (question.trackerAction === "Add an employee") {
+        // newEmployee = await inquirer.prompt([
+        //     {
+        //         type: 'input',
+        //         name: 'newEmployeeFirstName',
+        //         message: "What is the employee's first name? (Required)",
+        //         validate: newEmployeeFirstName => {
+        //             if (newEmployeeFirstName) {
+        //                 return true;
+        //             } else {
+        //                 console.log("Please enter the employee's first name!")
+        //             }
+        //         }
+        //     },
+        //     {
+        //         type: 'input',
+        //         name: 'newEmployeeLasttName',
+        //         message: "What is the employee's last name? (Required)",
+        //         validate: newEmployeeLastName => {
+        //             if (newEmployeeLastName) {
+        //                 return true;
+        //             } else {
+        //                 console.log("Please enter the employee's last name!")
+        //             }
+        //         }
+        //     },
+        //     {
+        //         type: 'input',
+        //         name: 'roleID',
+        //         message: "What is the employee's role id? (Required)",
+        //         validate: roleID => {
+        //             if (roleID) {
+        //                 return true;
+        //             } else {
+        //                 console.log("Please enter the role ID!")
+        //             }
+        //         }
+        //     },
+        //     {
+        //         type: 'input',
+        //         name: 'managerName',
+        //         message: "What is the Manager's name? (Required)",
+        //         validate: managerName => {
+        //             if (managerName) {
+        //                 return true;
+        //             } else {
+        //                 console.log("Please enter the manager's name!")
+        //             }
+        //         }
+        //     }
+
+        // ])
+
         addEmployee();
     } else if (question.trackerAction === "Update employee role") {
         updateEmployeeRole();
@@ -120,31 +173,46 @@ const viewEmployees = () => {
 };
 
 const addRole = () => {
-    const sql = `INSERT INTO employeerole (title, salary, department_id)
-    VALUES (?, ?, ?)`;
-    const params = [newRole.newRoleTitle, newRole.newRoleSalary, newRole.departmentID];
+    // const sql = `INSERT INTO employeerole (title, salary, department_id)
+    // VALUES (?, ?, ?)`;
+    const params = [newRole.newRoleTitle.title, newRole.newRoleSalary.salary, newRole.departmentID.department_id];
 
-    db.query(sql, params, (err, res) => {
+    db.query(`INSERT INTO employeerole (title, salary, department_id)
+    VALUES (?, ?, ?)`, params, (err, res) => {
         if (err) {
-            console.log('There has been an error!');
+            
             return;
         }
-       for (let l = 0; l < row.length; l++) {
-           roles.push(row[l]);
+            console.log('The role has been added!')
+            
            
-       }
+       
        
     })
     console.log("The role has been added!")
 };
 
+// const addEmployee = () => {
+//     const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_name)
+//     VALUES (?, ?, ?, ?)`;
+//     const params = [newEmployee.newEmployeeFirstName, newEmployee.newEmployeeLastName, newEmployee.roleID, newEmployee.managerName];
 
-const addEmployee = () => {
-    console.log('You will add an employee')
-}
+//     db.query(sql, params, (err, res) => {
+//         if (err) {
+//             console.log('There is an error!');
+//             return;
+//         }
+//        for (let m = 0; m < row.length; m++) {
+//            employees.push(row[m]);
+           
+//        }
+       
+//     })
+//     console.log("The employee has been added!")
+// }
 
-const updateEmployeeRole = () => {
-    console.log("You can update an employee role ")
+function updateEmployeeRole() {
+    console.log("You can update an employee role ");
 }
 
 
