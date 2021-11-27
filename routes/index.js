@@ -150,7 +150,27 @@ async function startQuestions() {
     }
 
     if (question.trackerAction === 'Add a department') {
+        newDepartment = await inquirer.prompt ([
+            {
+                type: 'input',
+                name: 'newDepartment',
+                message: "What is the new Department name? (Required)",
+                validate: newDepartment => {
+                    if (newDepartment) {
+                        return true;
+                    } else {
+                        console.log("Please enter a department name!")
+                    }
+                }
+            }
+        ])
+        if (newDepartment) {
+
+            departments.push(newDepartment);
+            console.log(departments);
+        }
         addDepartment();
+        startQuestions();
     }
 
 
@@ -259,8 +279,18 @@ const addEmployee = () => {
 };
 
 const addDepartment = () => {
-    console.log("you can add a department");
-}
+    const params = [departments[0].newDepartment];
+    console.log(departments[0].newDepartment);
+    db.query(`INSERT INTO department (department_name)
+    VALUES (?)`, params, (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        console.log("The deparment has been added!")
+    });
+};
 
 
 const updateEmployeeRole = () => {
