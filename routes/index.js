@@ -103,7 +103,7 @@ async function startQuestions() {
             },
             {
                 type: 'input',
-                name: 'newEmployeeLasttName',
+                name: 'newEmployeeLastName',
                 message: "What is the employee's last name? (Required)",
                 validate: newEmployeeLastName => {
                     if (newEmployeeLastName) {
@@ -141,8 +141,8 @@ async function startQuestions() {
         ])
         if (newEmployee) {
 
-            employees.push(newEmployee)
-            console.log(newEmployee);
+            employees.push(newEmployee);
+            console.log(employees);
         }
 
         addEmployee();
@@ -163,7 +163,7 @@ async function startQuestions() {
 
 
     else {
-        console.log("Have a nice day!")
+
         return;
     }
     startQuestions();
@@ -226,7 +226,7 @@ const addRole = () => {
 
 
     const params = [roles[0].newRoleTitle, roles[0].newRoleSalary, roles[0].departmentID];
-    
+
     db.query(`INSERT INTO employeerole (title, salary, department_id)
     VALUES (?, ?, ?)`, params, (err, res) => {
         if (err) {
@@ -234,43 +234,38 @@ const addRole = () => {
             return;
         }
 
-
-        console.log('The role has been added!')
-
-
-
     });
 
-
+    console.log('The role has been added!')
 
 };
 
 const addEmployee = () => {
 
     const params = [employees[0].newEmployeeFirstName, employees[0].newEmployeeLastName, employees[0].roleID, employees[0].managerName];
-
+    console.log(employees[0].newEmployeeLastName);
     db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_name)
     VALUES (?, ?, ?, ?)`, params, (err, res) => {
         if (err) {
-            console.log('There is an error!');
+            console.log(err);
             return;
         }
 
 
         console.log("The employee has been added!")
 
-    })
+    });
 
 };
 
 const addDepartment = () => {
-    console.log ("you can add a department");
+    console.log("you can add a department");
 }
 
 
 const updateEmployeeRole = () => {
-        console.log("You can update an employee role ");
-    }
+    console.log("You can update an employee role ");
+}
 
 
 startQuestions();
