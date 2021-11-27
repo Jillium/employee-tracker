@@ -1,3 +1,4 @@
+const { response } = require('express');
 const inquirer = require('inquirer');
 const db = require('../db/connection');
 
@@ -18,13 +19,30 @@ async function startQuestions() {
 
     if (question.trackerAction === 'View all departments') {
         viewDepartments();
+        startQuestions();
 
-    } else if (question.trackerAction === "View all roles") {
+    } 
+    
+    
+    
+    
+    if (question.trackerAction === "View all roles") {
         viewRoles();
-    } else if (question.trackerAction === "View all employees") {
+        startQuestions();
+    } 
+    
+    
+    
+    if (question.trackerAction === "View all employees") {
         viewEmployees();
-    } else if (question.trackerAction === "Add a role") {
-        newRole = await inquirer.prompt([
+        startQuestions();
+    } 
+    
+    
+    
+    let newRole
+    if (question.trackerAction === "Add a role") {
+         newRole = await inquirer.prompt([
             {
             type: 'input',
             name: 'newRoleTitle',
@@ -58,8 +76,17 @@ async function startQuestions() {
             
         ])
 
+        if (newRole) {
+            
+            roles.push(newRole)
+            console.log(roles);
+        }
+       
         addRole();
-    } else if (question.trackerAction === "Add an employee") {
+    } 
+    
+    
+     if (question.trackerAction === "Add an employee") {
         // newEmployee = await inquirer.prompt([
         //     {
         //         type: 'input',
@@ -113,9 +140,14 @@ async function startQuestions() {
         // ])
 
         addEmployee();
-    } else if (question.trackerAction === "Update employee role") {
+    }
+    
+    if (question.trackerAction === "Update employee role") {
         updateEmployeeRole();
-    } else {
+    } 
+    
+    
+    else {
         console.log("Have a nice day!")
         return;
     }
@@ -135,6 +167,7 @@ const viewDepartments = () => {
             departments.push(row[i]);
         }
         console.log(departments);
+        console.log('Arrow down to perform another action');
     })
 
 };
@@ -153,6 +186,7 @@ function viewRoles() {
             roles.push(row[j]);
         }
         console.log(roles);
+        console.log('Arrow down to perform another action');
     })
 
 };
@@ -169,27 +203,31 @@ const viewEmployees = () => {
             employees.push(row[k]);
         }
         console.log(employees);
+        console.log('Arrow down to perform another action');
     })
 };
 
 const addRole = () => {
-    // const sql = `INSERT INTO employeerole (title, salary, department_id)
-    // VALUES (?, ?, ?)`;
-    const params = [newRole.newRoleTitle.title, newRole.newRoleSalary.salary, newRole.departmentID.department_id];
-
+   
+    
+    const params = [newRole.newRoleTitle, newRole.newRoleSalary, newRole.departmentID];
+    console.log(params);
     db.query(`INSERT INTO employeerole (title, salary, department_id)
     VALUES (?, ?, ?)`, params, (err, res) => {
         if (err) {
             
             return;
         }
-            console.log('The role has been added!')
-            
            
+            console.log(result);
+           
+            
        
        
-    })
-    console.log("The role has been added!")
+    });
+    
+    console.log('The role has been added!')
+    
 };
 
 // const addEmployee = () => {
