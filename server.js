@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
-// view all departmetns from an api
+// view all departments from an api
 app.get('/api/department', (req, res) => {
     const sql = `SELECT * FROM department`;
 

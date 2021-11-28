@@ -1,12 +1,14 @@
-const { response } = require('express');
+const { express } = require('express');
 const inquirer = require('inquirer');
 const db = require('../db/connection');
 
 const departments = [];
 const roles = [];
 const employees = [];
+const updatedRole = [];
 
 console.log("Welcome to the employee tracker?")
+// function that starts the questions
 async function startQuestions() {
     const question = await inquirer.prompt([
         {
@@ -17,29 +19,31 @@ async function startQuestions() {
         }
     ])
 
+    // if the user decides to view all departments show all departments 
     if (question.trackerAction === 'View all departments') {
         viewDepartments();
+        // starts questions over again after a choice is made
         startQuestions();
 
     }
 
 
 
-
+    // if the user decides to view all roles show all roles 
     if (question.trackerAction === "View all roles") {
         viewRoles();
         startQuestions();
     }
 
 
-
+    // if the user decides to view all employees show employees
     if (question.trackerAction === "View all employees") {
         viewEmployees();
         startQuestions();
     }
 
 
-
+    // if user decides to add a role add a role 
     let newRole
     if (question.trackerAction === "Add a role") {
         newRole = await inquirer.prompt([
@@ -75,7 +79,7 @@ async function startQuestions() {
             }
 
         ])
-
+        // if a new role is added push to array so that it can be added in addRole() function 
         if (newRole) {
 
             roles.push(newRole)
@@ -142,7 +146,7 @@ async function startQuestions() {
         if (newEmployee) {
 
             employees.push(newEmployee);
-            console.log(employees);
+            
         }
 
         addEmployee();
@@ -150,7 +154,7 @@ async function startQuestions() {
     }
 
     if (question.trackerAction === 'Add a department') {
-        newDepartment = await inquirer.prompt ([
+        newDepartment = await inquirer.prompt([
             {
                 type: 'input',
                 name: 'newDepartment',
@@ -167,7 +171,7 @@ async function startQuestions() {
         if (newDepartment) {
 
             departments.push(newDepartment);
-            console.log(departments);
+            
         }
         addDepartment();
         startQuestions();
@@ -176,14 +180,59 @@ async function startQuestions() {
 
 
     if (question.trackerAction === "Update employee role") {
+        updatedEmployeeRole = await inquirer.prompt([ 
+            {
+                type: 'input',
+                name: 'employeeFirstName',
+                message: "What is the first name of the employee you would like to update? (Required)",
+                validate: employeeFirstName => {
+                    if (employeeFirstName) {
+                        return true;
+                    } else {
+                        console.log("Please enter your employee's first name!")
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'employeeLastName',
+                message: "What is the last name of the employee you would like to update? (Required)",
+                validate: employeeLastName => {
+                    if (employeeLastName) {
+                        return true;
+                    } else {
+                        console.log("Please enter your employee's last name!")
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'newRoleID',
+                message: "What is the new role id you would like to assign the employee? (Required)",
+                validate: newRoleID => {
+                    if (newRoleID) {
+                        return true;
+                    } else {
+                        console.log("Please enter the new role ID!")
+                    }
+                }
+            }
+        ])
+
+        if (updatedEmployeeRole) {
+            updatedRole.push(updatedEmployeeRole);
+            
+        }
+        
         updateEmployeeRole();
+        startQuestions();
     }
 
 
 
 
-    else {
-
+    if (question.trackerAction === 'Quit') {
+        console.log("Have a nice day! Press control C to exit");
         return;
     }
     startQuestions();
@@ -288,13 +337,24 @@ const addDepartment = () => {
             return;
         }
 
-        console.log("The deparment has been added!")
+        console.log("The department has been added!")
     });
 };
 
 
 const updateEmployeeRole = () => {
-    console.log("You can update an employee role ");
+    const params = [updatedRole[0].employeeFirstName, updatedRole[0].employeeLastName, updatedRole[0].newRoleID];
+   
+    db.query(`UPDATE employee set role_id = ?
+    WHERE first_name = ?`, params, (err, res) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("The employee has been updated!")
+    });
+
+
 }
 
 
