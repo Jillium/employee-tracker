@@ -1,6 +1,7 @@
 const { express } = require('express');
 const inquirer = require('inquirer');
 const db = require('../db/connection');
+const cTable = require('console.table');
 
 const departments = [];
 const roles = [];
@@ -249,7 +250,7 @@ const viewDepartments = () => {
         for (let i = 0; i < row.length; i++) {
             departments.push(row[i]);
         }
-        console.log(departments);
+        console.table('', departments);
         console.log('Arrow down to perform another action');
     })
 
@@ -268,7 +269,7 @@ const viewRoles = () => {
         for (let j = 0; j < row.length; j++) {
             roles.push(row[j]);
         }
-        console.log(roles);
+        console.table('', roles);
         console.log('Arrow down to perform another action');
     })
 
@@ -285,7 +286,8 @@ const viewEmployees = () => {
         for (let k = 0; k < row.length; k++) {
             employees.push(row[k]);
         }
-        console.log(employees);
+        
+        console.table('', employees);
         console.log('Arrow down to perform another action');
     })
 };
