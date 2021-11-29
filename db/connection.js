@@ -1,9 +1,5 @@
 const mysql = require('mysql2');
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 // connect to database
 const db = mysql.createConnection(
     {
