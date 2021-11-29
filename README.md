@@ -23,7 +23,7 @@
   Javascript,Node,Other
 
   ### Installation Instructions
-  Install express, inquirer and console.table by using the command <npm i express inquirer console.table" from the command line. Also clone the code from the github repository.
+  Install express, inquirer, MySQL2 and console.table by using the command <npm i express inquirer mysql2 console.table > from the command line. Also clone the code from the github repository.
 
   ### What will the app be used for? 
   It will be used to track employees and pertinent data.
