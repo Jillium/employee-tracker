@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 
 const express = require('express');
 const inputCheck = require('./utils/inputCheck');
 const db = require('./db/connection.js');
+=======
+const express = require('express');
+const inputCheck = require('./utils/inputCheck');
+const db = require('./db/connection');
+
+
+>>>>>>> develop
 
 const PORT = process.env.PORT || 3011;
 const app = express();
@@ -11,7 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
+<<<<<<< HEAD
 // view all departmetns
+=======
+// view all departments from an api
+>>>>>>> develop
 app.get('/api/department', (req, res) => {
     const sql = `SELECT * FROM department`;
 
@@ -133,7 +145,7 @@ app.post('/api/employee', ({ body }, res) => {
     });
   });
 
-// Update a candidate's party
+// Update an employee role 
 app.put('/api/employee/:id', (req, res) => {
     const sql = `UPDATE employee SET role_id = ? 
                  WHERE id = ?`;
