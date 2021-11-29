@@ -22,8 +22,7 @@ async function startQuestions() {
     // if the user decides to view all departments show all departments 
     if (question.trackerAction === 'View all departments') {
         viewDepartments();
-        // starts questions over again after a choice is made
-        startQuestions();
+       
 
     }
 
@@ -32,14 +31,14 @@ async function startQuestions() {
     // if the user decides to view all roles show all roles 
     if (question.trackerAction === "View all roles") {
         viewRoles();
-        startQuestions();
+        
     }
 
 
     // if the user decides to view all employees show employees
     if (question.trackerAction === "View all employees") {
         viewEmployees();
-        startQuestions();
+       
     }
 
 
@@ -87,7 +86,7 @@ async function startQuestions() {
         }
 
         addRole();
-        startQuestions();
+        
     }
 
 
@@ -150,7 +149,7 @@ async function startQuestions() {
         }
 
         addEmployee();
-        startQuestions();
+       
     }
 
     if (question.trackerAction === 'Add a department') {
@@ -174,7 +173,7 @@ async function startQuestions() {
             
         }
         addDepartment();
-        startQuestions();
+       
     }
 
 
@@ -225,7 +224,7 @@ async function startQuestions() {
         }
         
         updateEmployeeRole();
-        startQuestions();
+       
     }
 
 
@@ -306,6 +305,7 @@ const addRole = () => {
     });
 
     console.log('The role has been added!')
+    console.log('Arrow down to perform another action');
 
 };
 
@@ -322,6 +322,7 @@ const addEmployee = () => {
 
 
         console.log("The employee has been added!")
+        console.log("Arrow down to perform another action");
 
     });
 
@@ -338,6 +339,7 @@ const addDepartment = () => {
         }
 
         console.log("The department has been added!")
+        console.log("Arrow down to perform another action");
     });
 };
 
@@ -352,6 +354,7 @@ const updateEmployeeRole = () => {
             return;
         }
         console.log("The employee has been updated!")
+        console.log("Arrow down to perform another action");
     });
 
 
