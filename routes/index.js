@@ -180,6 +180,7 @@ async function startQuestions() {
 
 
     if (question.trackerAction === "Update employee role") {
+        
         updatedEmployeeRole = await inquirer.prompt([ 
             {
                 type: 'input',
@@ -278,7 +279,12 @@ const viewRoles = () => {
 const viewEmployees = () => {
 
 
-    db.query(`SELECT * FROM employee`, (err, row) => {
+    db.query(`SELECT employee.*
+    from employee
+    JOIN department
+    ON employee.department_id = department.id
+    JOIN employeerole
+    ON employee.role_id = employeerole.id`, (err, row) => {
         if (err) {
             console.log(err);
             return;
@@ -347,6 +353,7 @@ const addDepartment = () => {
 
 
 const updateEmployeeRole = () => {
+    
     const params = [updatedRole[0].newRoleID, updatedRole[0].employeeFirstName, updatedRole[0].employeeLastName];
    
     db.query(`UPDATE employee set role_id = ?

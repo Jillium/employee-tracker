@@ -1,13 +1,3 @@
-INSERT INTO employee (first_name, last_name, role_id, manager_name)
-VALUES
-('Mike', 'Chan', 1, 'John Doe'),
-('Ashley', 'Rodriguez', 2, ''),
-('Kevin', 'Tupik', 3, 'Ashley Rodriguez'),
-('Kunal', 'Singh', 4, ''),
-('Malia', 'Brown', 5, 'Kunal Singh'),
-('Sarah', 'Lourd', 6, ''),
-('Tom', 'Allen', 7, 'Sarah Lourd');
-
 
 INSERT INTO employeerole (title, salary, department_id)
 VALUES 
@@ -26,5 +16,15 @@ VALUES
 ('Engineering'),
 ('Finance'),
 ('Legal');
+
+INSERT INTO employee (first_name, last_name, role_id, manager_name, department_id)
+VALUES
+('Mike', 'Chan', 1, 'John Doe', 1),
+('Ashley', 'Rodriguez', 2, '', 2),
+('Kevin', 'Tupik', 3, 'Ashley Rodriguez', 2),
+('Kunal', 'Singh', 4, '', 3),
+('Malia', 'Brown', 5, 'Kunal Singh', 3),
+('Sarah', 'Lourd', 6, '', 4),
+('Tom', 'Allen', 7, 'Sarah Lourd', 4);
 
 
