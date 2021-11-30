@@ -279,11 +279,11 @@ const viewRoles = () => {
 const viewEmployees = () => {
 
 
-    db.query(`SELECT employee.*
+    db.query(`SELECT employee.*, department.department_name, employeerole.title
     from employee
-    JOIN department
+    LEFT JOIN department
     ON employee.department_id = department.id
-    JOIN employeerole
+    LEFT JOIN employeerole
     ON employee.role_id = employeerole.id`, (err, row) => {
         if (err) {
             console.log(err);
