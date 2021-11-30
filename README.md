@@ -16,7 +16,8 @@
   ## Project Description 
   An employee tracker for business use. It allows you to view employees, departments and roles. It also allows you to add employees, departments, and roles and update an employee role. It is made with Node.js, inquirer and express. It connects to a MySQL database to persist the data.
 
-  
+  <img src = "./public/assets/images/screenshot1.png">
+  <img scr = "./public/assets/images/screenshot2.png">
   
   
   ## Languages Used 
