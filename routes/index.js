@@ -8,7 +8,7 @@ const roles = [];
 const employees = [];
 const updatedRole = [];
 
-console.log("Welcome to the employee tracker?")
+console.log("------------------Employee Tracker---------------------");
 // function that starts the questions
 async function startQuestions() {
     const question = await inquirer.prompt([
@@ -347,7 +347,7 @@ const addDepartment = () => {
 
 
 const updateEmployeeRole = () => {
-    const params = [updatedRole[0].employeeFirstName, updatedRole[0].employeeLastName, updatedRole[0].newRoleID];
+    const params = [updatedRole[0].newRoleID, updatedRole[0].employeeFirstName, updatedRole[0].employeeLastName];
    
     db.query(`UPDATE employee set role_id = ?
     WHERE first_name = ?`, params, (err, res) => {
