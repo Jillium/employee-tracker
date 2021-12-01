@@ -83,7 +83,7 @@ async function startQuestions() {
         if (newRole) {
 
             roles.push(newRole)
-            console.log(roles);
+            
         }
 
         addRole();
