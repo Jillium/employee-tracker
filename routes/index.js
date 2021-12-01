@@ -140,6 +140,18 @@ async function startQuestions() {
                         console.log("Please enter the manager's name!")
                     }
                 }
+            },
+            {
+                type: 'input',
+                name: 'departmentID',
+                message: "What is the employee's department id? (Required)",
+                validate: departmentID => {
+                    if (departmentID) {
+                        return true;
+                    } else {
+                        console.log("Please enter the department ID!")
+                    }
+                }
             }
 
         ])
@@ -325,17 +337,17 @@ const addRole = () => {
 // function to add an employee 
 const addEmployee = () => {
 
-    const params = [employees[0].newEmployeeFirstName, employees[0].newEmployeeLastName, employees[0].roleID, employees[0].managerName];
-    console.log(employees[0].newEmployeeLastName);
-    db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_name)
-    VALUES (?, ?, ?, ?)`, params, (err, res) => {
+    const params = [employees[0].newEmployeeFirstName, employees[0].newEmployeeLastName, employees[0].roleID, employees[0].managerName, employees[0].departmentID];
+    console.log(employees[0].newEmployeeLastName)
+    db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_name, department_id)
+    VALUES (?, ?, ?, ?, ?)`, params, (err, res) => {
         if (err) {
             console.log(err);
             return;
         }
 
 
-        console.log("The employee has been added!")
+        console.log('', "The employee has been added!")
         console.log("Arrow down to perform another action");
 
     });
