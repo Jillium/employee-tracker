@@ -90,7 +90,7 @@ async function startQuestions() {
         
     }
 
-
+    // if the user decides to add an employee 
     if (question.trackerAction === "Add an employee") {
         newEmployee = await inquirer.prompt([
             {
@@ -153,6 +153,7 @@ async function startQuestions() {
        
     }
 
+        // if the user decides to add a department 
     if (question.trackerAction === 'Add a department') {
         newDepartment = await inquirer.prompt([
             {
@@ -178,7 +179,7 @@ async function startQuestions() {
     }
 
 
-
+    // if the user decides to update an employee role
     if (question.trackerAction === "Update employee role") {
         
         updatedEmployeeRole = await inquirer.prompt([ 
@@ -231,7 +232,7 @@ async function startQuestions() {
 
 
 
-
+// if the user decides to quit
     if (question.trackerAction === 'Quit') {
         console.log("Have a nice day! Press control C to exit");
         return;
@@ -239,6 +240,8 @@ async function startQuestions() {
     startQuestions();
 };
 
+
+// function to view departments 
 const viewDepartments = () => {
 
 
@@ -257,7 +260,7 @@ const viewDepartments = () => {
 
 };
 
-
+// function to view roles 
 
 const viewRoles = () => {
 
@@ -276,6 +279,7 @@ const viewRoles = () => {
 
 };
 
+// function to view employees 
 const viewEmployees = () => {
 
 
@@ -298,6 +302,7 @@ const viewEmployees = () => {
     })
 };
 
+// function to add a role
 const addRole = () => {
 
 
@@ -317,6 +322,7 @@ const addRole = () => {
 
 };
 
+// function to add an employee 
 const addEmployee = () => {
 
     const params = [employees[0].newEmployeeFirstName, employees[0].newEmployeeLastName, employees[0].roleID, employees[0].managerName];
@@ -336,6 +342,8 @@ const addEmployee = () => {
 
 };
 
+
+// function to add a department 
 const addDepartment = () => {
     const params = [departments[0].newDepartment];
     console.log(departments[0].newDepartment);
@@ -351,7 +359,7 @@ const addDepartment = () => {
     });
 };
 
-
+// function to update an employee role 
 const updateEmployeeRole = () => {
     
     const params = [updatedRole[0].newRoleID, updatedRole[0].employeeFirstName, updatedRole[0].employeeLastName];
@@ -369,5 +377,5 @@ const updateEmployeeRole = () => {
 
 }
 
-
+// starts the program 
 startQuestions();
