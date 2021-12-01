@@ -3,10 +3,10 @@ const inquirer = require('inquirer');
 const db = require('../db/connection');
 const cTable = require('console.table');
 
-const departments = [];
-const roles = [];
-const employees = [];
-const updatedRole = [];
+let departments = [];
+let roles = [];
+let employees = [];
+let updatedRole = [];
 
 console.log("------------------Employee Tracker---------------------");
 // function that starts the questions
@@ -92,6 +92,7 @@ async function startQuestions() {
 
     // if the user decides to add an employee 
     if (question.trackerAction === "Add an employee") {
+        
         newEmployee = await inquirer.prompt([
             {
                 type: 'input',
@@ -256,7 +257,7 @@ async function startQuestions() {
 // function to view departments 
 const viewDepartments = () => {
 
-
+    departments = [];
 
     db.query(`SELECT * FROM department`, (err, row) => {
         if (err) {
@@ -276,6 +277,7 @@ const viewDepartments = () => {
 
 const viewRoles = () => {
 
+    roles = [];
 
     db.query(`SELECT * FROM employeerole`, (err, row) => {
         if (err) {
@@ -293,7 +295,7 @@ const viewRoles = () => {
 
 // function to view employees 
 const viewEmployees = () => {
-
+    employees = [];
 
     db.query(`SELECT employee.*, department.department_name AS department, employeerole.title AS role
     from employee
@@ -318,7 +320,7 @@ const viewEmployees = () => {
 const addRole = () => {
 
 
-    const params = [roles[0].newRoleTitle, roles[0].newRoleSalary, roles[0].departmentID];
+    const params = [roles[roles.length-1].newRoleTitle, roles[roles.length-1].newRoleSalary, roles[roles.length-1].departmentID];
 
     db.query(`INSERT INTO employeerole (title, salary, department_id)
     VALUES (?, ?, ?)`, params, (err, res) => {
@@ -337,8 +339,8 @@ const addRole = () => {
 // function to add an employee 
 const addEmployee = () => {
 
-    const params = [employees[0].newEmployeeFirstName, employees[0].newEmployeeLastName, employees[0].roleID, employees[0].managerName, employees[0].departmentID];
-    console.log(employees[0].newEmployeeLastName)
+    const params = [employees[employees.length-1].newEmployeeFirstName, employees[employees.length-1].newEmployeeLastName, employees[employees.length-1].roleID, employees[employees.length-1].managerName, employees[employees.length-1].departmentID];
+    
     db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_name, department_id)
     VALUES (?, ?, ?, ?, ?)`, params, (err, res) => {
         if (err) {
@@ -357,8 +359,8 @@ const addEmployee = () => {
 
 // function to add a department 
 const addDepartment = () => {
-    const params = [departments[0].newDepartment];
-    console.log(departments[0].newDepartment);
+    const params = [departments[departments.length-1].newDepartment];
+    
     db.query(`INSERT INTO department (department_name)
     VALUES (?)`, params, (err, res) => {
         if (err) {
