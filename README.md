@@ -18,13 +18,16 @@
 
   <img src = "./public/assets/images/screenshot1.png">
   <img src = "./public/assets/images/screenshot2.png">
+
+  ## Video Demonstration
+  https://drive.google.com/file/d/1TI8Ai2MVKWueg8laOMEy98uKWTZXCNYz/view?usp=sharing
   
   
   ## Languages Used 
   Javascript,Node,Other
 
   ### Installation Instructions
-  Install express, inquirer, MySQL2 and console.table by using the command <npm i express inquirer mysql2 console.table > from the command line. Also clone the code from the github repository.
+  Install express, inquirer, MySQL2 and console.table by using the command "npm i express inquirer mysql2 console.table" from the command line. Also clone the code from the github repository.
 
   ### What will the app be used for? 
   It will be used to track employees and pertinent data.
