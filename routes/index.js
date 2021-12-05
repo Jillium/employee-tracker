@@ -379,7 +379,7 @@ const updateEmployeeRole = () => {
     const params = [updatedRole[0].newRoleID, updatedRole[0].employeeFirstName, updatedRole[0].employeeLastName];
    
     db.query(`UPDATE employee set role_id = ?
-    WHERE first_name = ?`, params, (err, res) => {
+    WHERE first_name = ? and last_name = ?`, params, (err, res) => {
         if (err) {
             console.log(err);
             return;
